@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="layout.xhtml">
+
+  <ui:define name="title">eBusiness</ui:define>
+
+  <ui:define name="heading">
+    eBusiness: Product, Customer and Order Management
+  </ui:define>
+
+  <ui:define name="content">
+    <h3 style="font-weight:bold;">PRODUCTS</h3>
+    <p>
+      <a href="createLaptop.xhtml">Create a New Laptop</a> | 
+      <a href="stockLaptops.xhtml">The Stock of Laptops</a> | 
+      <a href="searchLaptop.xhtml">Search for a Laptop</a><br />
+      <a href="createPhone.xhtml">Create a New Phone</a> | 
+      <a href="stockPhones.xhtml">The Stock of Phones</a> | 
+      <a href="searchPhone.xhtml">Search for a Phone</a>
+    </p>
+
+    <h3 style="font-weight:bold;">CUSTOMERS</h3>
+    <p>
+      <a href="createCustomer.xhtml">Create a New Customer</a> | 
+      <a href="listCustomers.xhtml">List of Customers</a> | 
+      <a href="searchCustomer.xhtml">Search for a Customer</a>
+    </p>
+
+    <h3 style="font-weight:bold;">ORDERS</h3>
+    <p>
+      <a href="createOrder.xhtml">Create a New Order</a> | 
+      <a href="listOrders.xhtml">List of Orders</a> | 
+      <a href="searchOrder.xhtml">Search for an Order</a>
+    </p>
+
+    <hr />
+
+  </ui:define>
+
+  <ui:define name="footer">
+    <a href="logout.xhtml">Logout</a>
+  </ui:define>
+
+</ui:composition>
+
+</html>
