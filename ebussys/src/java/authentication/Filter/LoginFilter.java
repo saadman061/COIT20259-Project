@@ -29,7 +29,7 @@ public class LoginFilter implements Filter {
         //Retrieve the authtication bean
        //AutenticationBean session = (AutenticationBean) req.getSession(true).getAttribute("authBean");
        //Any after login accessible pages should be listed here
-       String[] afterLog = {"logout.xhtml", "dashboard.xhtml"};
+       String[] afterLog = {"logout.xhtml", "dashboard.xhtml", "createLaptop.xhtml", "stockLaptops.xhtml","searchLaptop.xhtml"};
        String url=req.getRequestURI();
        if (session==null || !session.isLogged()) {
            boolean risk=false;
