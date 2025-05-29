@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition template="layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+  <ui:define name="title">Orders List</ui:define>
+
+  <ui:define name="heading">
+    <h2 style="background-color:#4a607a; color:#fff; padding:6px;">Orders List</h2>
+  </ui:define>
+
+  <ui:define name="content">
+    <h:messages globalOnly="true" />
+
+    <h:dataTable value="#{orderBean.allOrders}" var="o" border="1" cellpadding="4" style="width:100%;">
+      <h:column><f:facet name="header"><b>Customer</b></f:facet>#{o.customerName}</h:column>
+      <h:column><f:facet name="header"><b>Email</b></f:facet>#{o.email}</h:column>
+      <h:column><f:facet name="header"><b>Model</b></f:facet>#{o.productModel}</h:column>
+      <h:column><f:facet name="header"><b>Qty</b></f:facet>#{o.quantity}</h:column>
+      <h:column><f:facet name="header"><b>Total</b></f:facet>$#{o.totalPrice}</h:column>
+      <h:column><f:facet name="header"><b>Date</b></f:facet>
+        <h:outputText value="#{o.orderDate}">
+          <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+        </h:outputText>
+      </h:column>
+    </h:dataTable>
+
+    <br />
+    <h:outputText value="Total orders: #{fn:length(orderBean.allOrders)}" />
+
+    <hr />
+    <h:link value="Place a New Order" outcome="createOrder.xhtml" />
+    |
+    <h:link value="Main Page" outcome="dashboard.xhtml" />
+  </ui:define>
+
+</ui:composition>

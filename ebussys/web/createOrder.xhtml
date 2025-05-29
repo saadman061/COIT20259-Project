@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition template="layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="title">Place a New Order</ui:define>
+
+    <ui:define name="heading">
+        <h2 style="background-color:#4a607a; color:#fff; padding:6px;">Place a New Order</h2>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="createOrderForm">
+            <h:messages globalOnly="true" />
+
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputLabel for="customerName" value="Customer Name:" />
+                <h:inputText id="customerName" value="#{orderBean.currentOrder.customerName}" required="true" />
+
+                <h:outputLabel for="email" value="Email:" />
+                <h:panelGroup>
+                    <h:inputText id="email" value="#{orderBean.currentOrder.email}" required="true">
+                        <f:validateRegex pattern="^[\\w.%+-]+@[\\w.-]+\\.[A-Za-z]{2,}$" />
+                    </h:inputText>
+                    <h:message for="email" style="display:none;" />
+                    <h:outputText value="Please enter a valid email (e.g., user@example.com)"
+                                  rendered="#{not empty facesContext.messageList}" 
+                                  style="color:red;" />
+                </h:panelGroup>
+
+
+                <h:outputLabel for="productModel" value="Product Model:" />
+                <h:inputText id="productModel" value="#{orderBean.currentOrder.productModel}" required="true" />
+
+                <h:outputLabel for="quantity" value="Quantity:" />
+                <h:inputText id="quantity" value="#{orderBean.currentOrder.quantity}" required="true" />
+
+                <h:outputLabel for="totalPrice" value="Total Price:" />
+                <h:inputText id="totalPrice" value="#{orderBean.currentOrder.totalPrice}" required="true" />
+            </h:panelGrid>
+
+            <br />
+            <h:commandButton value="Place Order" action="#{orderBean.placeOrder}" />
+        </h:form>
+
+        <hr />
+        <h:link value="View Orders" outcome="stockOrders.xhtml" />
+        |
+        <h:link value="Main Page" outcome="dashboard.xhtml" />
+    </ui:define>
+
+</ui:composition>
