@@ -11,9 +11,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+
+
+
 @Entity
 @Table(name = "PRODUCT")
-public class Product implements Serializable {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,14 +35,10 @@ public class Product implements Serializable {
     private double price;
     private String description;
     private int stockNumber;
-    private String networkInterface;
-    private String hardDrive;
-    private String ports;
 
-    // Public no-arg constructor (required)
     public Product() {}
 
-    // Getters and Setters
+    // === Getters & Setters ===
 
     public Integer getId() {
         return id;
@@ -125,29 +127,4 @@ public class Product implements Serializable {
     public void setStockNumber(int stockNumber) {
         this.stockNumber = stockNumber;
     }
-
-    public String getNetworkInterface() {
-        return networkInterface;
-    }
-
-    public void setNetworkInterface(String networkInterface) {
-        this.networkInterface = networkInterface;
-    }
-
-    public String getHardDrive() {
-        return hardDrive;
-    }
-
-    public void setHardDrive(String hardDrive) {
-        this.hardDrive = hardDrive;
-    }
-
-    public String getPorts() {
-        return ports;
-    }
-
-    public void setPorts(String ports) {
-        this.ports = ports;
-    }
-
 }
