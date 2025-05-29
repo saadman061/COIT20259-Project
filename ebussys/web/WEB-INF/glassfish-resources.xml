@@ -6,7 +6,7 @@
         <property name="portNumber" value="3306"/>
         <property name="databaseName" value="ebussysdb"/>
         <property name="User" value="root"/>
-        <property name="Password" value="saadman0066"/>
+        <property name="Password" value="ghost"/>
         <property name="URL" value="jdbc:mysql://localhost:3306/ebussysdb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
         <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
     </jdbc-connection-pool>
