@@ -22,23 +22,24 @@ public class ProductBean implements Serializable {
     @Resource
     private UserTransaction utx;
 
-    private Laptop currentLaptop;  // changed from Product
+    private Product currentProduct;  // lazy init
 
     private String searchModel;
-    private List<Laptop> searchResults;
-    private List<Laptop> allLaptops;
+    private List<Product> searchResults;
+    private List<Product> allProducts; // stock list cache
 
     private String successMessage;
 
-    public Laptop getCurrentLaptop() {
-        if (currentLaptop == null) {
-            currentLaptop = new Laptop();
+    // Lazy initialization of currentProduct
+    public Product getCurrentProduct() {
+        if (currentProduct == null) {
+            currentProduct = new Product();
         }
-        return currentLaptop;
+        return currentProduct;
     }
 
-    public void setCurrentLaptop(Laptop currentLaptop) {
-        this.currentLaptop = currentLaptop;
+    public void setCurrentProduct(Product currentProduct) {
+        this.currentProduct = currentProduct;
     }
 
     public String getSearchModel() {
@@ -49,23 +50,23 @@ public class ProductBean implements Serializable {
         this.searchModel = searchModel;
     }
 
-    public List<Laptop> getSearchResults() {
+    public List<Product> getSearchResults() {
         return searchResults;
     }
 
-    public void setSearchResults(List<Laptop> searchResults) {
+    public void setSearchResults(List<Product> searchResults) {
         this.searchResults = searchResults;
     }
 
-    public List<Laptop> getAllLaptops() {
-        if (allLaptops == null) {
-            allLaptops = em.createQuery("SELECT p FROM Laptop p", Laptop.class).getResultList();
+    public List<Product> getAllProducts() {
+        if (allProducts == null) {
+            allProducts = em.createQuery("SELECT p FROM Product p", Product.class).getResultList();
         }
-        return allLaptops;
+        return allProducts;
     }
 
-    public void setAllLaptops(List<Laptop> allLaptops) {
-        this.allLaptops = allLaptops;
+    public void setAllProducts(List<Product> allProducts) {
+        this.allProducts = allProducts;
     }
 
     public String getSuccessMessage() {
@@ -76,37 +77,42 @@ public class ProductBean implements Serializable {
         this.successMessage = successMessage;
     }
 
-    public String createLaptop() {
+    // Create a new product
+    public String createProduct() {
         try {
             utx.begin();
-            em.persist(getCurrentLaptop());
+            em.persist(getCurrentProduct());
             utx.commit();
 
-            successMessage = "Successfully created the laptop: " + currentLaptop.getModel();
-            currentLaptop = null;
-            allLaptops = null;
-            searchResults = null;
+            successMessage = "Successfully created the product: " + currentProduct.getModel();
+            currentProduct = null; // reset for next input
+            allProducts = null;    // refresh stock cache
+            searchResults = null;  // clear search results
 
+            // stay on same page or redirect to stock page
             return "stockLaptops.xhtml?faces-redirect=true&success=true&message=" + successMessage;
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error creating laptop", e.getMessage()));
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error creating product", e.getMessage()));
             return null;
         }
     }
 
-    public void searchLaptops() {
+    // Search products by model
+    public void searchProducts() {
         if (searchModel == null || searchModel.trim().isEmpty()) {
-            searchResults = em.createQuery("SELECT p FROM Laptop p", Laptop.class).getResultList();
+            searchResults = em.createQuery("SELECT p FROM Product p", Product.class).getResultList();
         } else {
-            searchResults = em.createQuery("SELECT p FROM Laptop p WHERE LOWER(p.model) LIKE :model", Laptop.class)
+            searchResults = em.createQuery("SELECT p FROM Product p WHERE LOWER(p.model) LIKE :model", Product.class)
                     .setParameter("model", "%" + searchModel.toLowerCase() + "%")
                     .getResultList();
         }
     }
 
+    // Reset search
     public void resetSearch() {
         searchModel = null;
         searchResults = null;
     }
+
 }

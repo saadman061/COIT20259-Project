@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?> 
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -11,70 +11,72 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-  <ui:define name="title">Create a New Laptop</ui:define>
+  <ui:define name="title">Create a New Product</ui:define>
 
   <ui:define name="heading">
-    <h2 style="background-color:#4a607a; color:#fff; padding:6px;">Create a New Laptop</h2>
+    <h2 style="background-color:#4a607a; color:#fff; padding:6px;">Create a New Product</h2>
   </ui:define>
 
   <ui:define name="content">
 
-    <h:form id="createLaptopForm">
+    <h:form id="createProductForm">
       <h:messages globalOnly="true" />
 
       <h:panelGrid columns="2" cellpadding="5">
         <h:outputLabel for="brand" value="Brand:" />
-        <h:inputText id="brand" value="#{productBean.currentLaptop.brand}" required="true" />
+        <h:inputText id="brand" value="#{productBean.currentProduct.brand}" required="true" />
 
         <h:outputLabel for="model" value="Model:" />
-        <h:inputText id="model" value="#{productBean.currentLaptop.model}" required="true" />
+        <h:inputText id="model" value="#{productBean.currentProduct.model}" required="true" />
 
         <h:outputLabel for="displaySize" value="Display Size:" />
-        <h:inputText id="displaySize" value="#{productBean.currentLaptop.displaySize}" required="true" />
+        <h:inputText id="displaySize" value="#{productBean.currentProduct.displaySize}" required="true" />
 
-        <h:outputLabel for="weight" value="Weight (gram):" />
-        <h:inputText id="weight" value="#{productBean.currentLaptop.weight}" required="true" />
+        <h:outputLabel for="weight" value="Weight(gram):" />
+        <h:inputText id="weight" value="#{productBean.currentProduct.weight}" required="true" />
 
         <h:outputLabel for="operatingSystem" value="Operating System:" />
-        <h:inputText id="operatingSystem" value="#{productBean.currentLaptop.operatingSystem}" required="true" />
+        <h:inputText id="operatingSystem" value="#{productBean.currentProduct.operatingSystem}" required="true" />
 
         <h:outputLabel for="camera" value="Camera:" />
-        <h:inputText id="camera" value="#{productBean.currentLaptop.camera}" />
+        <h:inputText id="camera" value="#{productBean.currentProduct.camera}" />
 
         <h:outputLabel for="wifi" value="Wi-Fi:" />
-        <h:inputText id="wifi" value="#{productBean.currentLaptop.wifi}" />
+        <h:inputText id="wifi" value="#{productBean.currentProduct.wifi}" />
 
         <h:outputLabel for="price" value="Price:" />
-        <h:inputText id="price" value="#{productBean.currentLaptop.price}" required="true" />
+        <h:inputText id="price" value="#{productBean.currentProduct.price}" required="true" />
 
         <h:outputLabel for="description" value="Description:" />
-        <h:inputTextarea id="description" value="#{productBean.currentLaptop.description}" rows="4" cols="25" />
+        <h:inputTextarea id="description" value="#{productBean.currentProduct.description}" rows="4" cols="25" />
 
         <h:outputLabel for="stockNumber" value="Stock Number:" />
-        <h:inputText id="stockNumber" value="#{productBean.currentLaptop.stockNumber}" />
+        <h:inputText id="stockNumber" value="#{productBean.currentProduct.stockNumber}" />
 
         <h:outputLabel for="networkInterface" value="Network Interface:" />
-        <h:inputText id="networkInterface" value="#{productBean.currentLaptop.networkInterface}" />
+        <h:inputText id="networkInterface" value="#{productBean.currentProduct.networkInterface}" />
 
         <h:outputLabel for="hardDrive" value="Hard Drive:" />
-        <h:inputText id="hardDrive" value="#{productBean.currentLaptop.hardDrive}" />
+        <h:inputText id="hardDrive" value="#{productBean.currentProduct.hardDrive}" />
 
         <h:outputLabel for="ports" value="Ports:" />
-        <h:inputText id="ports" value="#{productBean.currentLaptop.ports}" />
+        <h:inputText id="ports" value="#{productBean.currentProduct.ports}" />
       </h:panelGrid>
 
       <br />
 
-      <h:commandButton value="Create Laptop" action="#{productBean.createLaptop}" />
+      <h:commandButton value="Create Product" action="#{productBean.createProduct}" />
     </h:form>
 
     <hr />
 
-    <h:link value="View All Laptops" outcome="stockLaptops.xhtml" />
+    <h:link value="The Stock of Products" outcome="stockLaptops.xhtml" />
     |
     <h:link value="Main Page" outcome="dashboard.xhtml" />
 
   </ui:define>
 
 </ui:composition>
+
+
 </html>

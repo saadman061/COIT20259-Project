@@ -4,18 +4,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition template="layout.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
-  <ui:define name="title">Laptop Stock</ui:define>
+  <ui:define name="title">The Stock of Products</ui:define>
 
   <ui:define name="heading">
-    <h2 style="background-color:#4a607a; color:#fff; padding:6px;">Laptop Stock</h2>
+    <h2 style="background-color:#4a607a; color:#fff; padding:6px;">The Stock of Products</h2>
   </ui:define>
 
   <ui:define name="content">
@@ -24,7 +24,8 @@
 
     <h:outputText rendered="#{not empty param.success}" value="#{param.message}" style="color:blue;" />
 
-    <h:dataTable value="#{productBean.allLaptops}" var="product" border="1" cellpadding="4" style="width:100%;">
+    <h:dataTable value="#{productBean.allProducts}" var="product" border="1" cellpadding="4" style="width:100%;">
+
       <h:column>
         <f:facet name="header"><b>Brand</b></f:facet>
         #{product.brand}
@@ -32,7 +33,9 @@
 
       <h:column>
         <f:facet name="header"><b>Model</b></f:facet>
-        #{product.model}
+        <h:link outcome="productDetails.xhtml" value="#{product.model}">
+          <f:param name="model" value="#{product.model}" />
+        </h:link>
       </h:column>
 
       <h:column>
@@ -41,35 +44,30 @@
       </h:column>
 
       <h:column>
-        <f:facet name="header"><b>Weight (gram)</b></f:facet>
+        <f:facet name="header"><b>Weight(gram)</b></f:facet>
         #{product.weight}
       </h:column>
 
       <h:column>
-        <f:facet name="header"><b>OS</b></f:facet>
+        <f:facet name="header"><b>Operating System</b></f:facet>
         #{product.operatingSystem}
       </h:column>
 
-      <h:column>
-        <f:facet name="header"><b>Network</b></f:facet>
-        #{product.networkInterface}
-      </h:column>
+      <!-- Add other columns similarly if needed -->
 
-      <h:column>
-        <f:facet name="header"><b>Stock</b></f:facet>
-        #{product.stockNumber}
-      </h:column>
     </h:dataTable>
 
     <br />
-    <h:outputText value="Total laptops: #{fn:length(productBean.allLaptops)}" />
+
+    <h:outputText value="Total products: #{fn:length(productBean.allProducts)}" />
 
     <hr />
 
-    <h:link value="Create a New Laptop" outcome="createLaptop.xhtml" />
+    <h:link value="Create a New Product" outcome="createLaptop.xhtml" />
     |
     <h:link value="Main Page" outcome="dashboard.xhtml" />
 
   </ui:define>
+
 </ui:composition>
 </html>
