@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<ui:composition template="layout.xhtml">
+
+  <ui:define name="title">Search for a Customer</ui:define>
+
+  <ui:define name="heading">
+    <h2 style="background-color:#4a607a; color:#fff; padding:6px;">Search for a Customer</h2>
+  </ui:define>
+
+  <ui:define name="content">
+    <h:form>
+      <h:outputLabel for="searchName" value="Name:" />
+      <h:inputText id="searchName" value="#{customerBean.searchName}" />
+      <br /><br />
+      <h:commandButton value="Search" action="#{customerBean.searchCustomers}" />
+      <h:commandButton value="Reset" action="#{customerBean.resetSearch}" immediate="true" />
+    </h:form>
+
+    <br />
+
+    <!-- Wrap the dataTable and action link inside a form! -->
+    <h:form>
+      <h:dataTable value="#{customerBean.searchResults}" var="customer" border="1" cellpadding="4" rendered="#{not empty customerBean.searchResults}">
+        <h:column><f:facet name="header"><b>Name</b></f:facet>#{customer.name}</h:column>
+        <h:column><f:facet name="header"><b>Address</b></f:facet>#{customer.address}</h:column>
+        <h:column><f:facet name="header"><b>Order</b></f:facet>#{customer.orders}</h:column>
+        <h:column>
+          <f:facet name="header"><b>Action</b></f:facet>
+          <h:commandLink value="View Details" action="#{customerBean.viewCustomer(customer)}" />
+        </h:column>
+      </h:dataTable>
+    </h:form>
+
+    <h:outputText rendered="#{not empty customerBean.searchResults}" value="Total customers: #{fn:length(customerBean.searchResults)}" />
+
+    <hr />
+    <h:link value="Create a Customer" outcome="createCustomer" />
+    |
+    <h:link value="Customer List" outcome="listCustomers" />
+    |
+    <h:link value="Main Page" outcome="dashboard" />
+  </ui:define>
+
+</ui:composition>
+</html>

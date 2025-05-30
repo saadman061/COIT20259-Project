@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="layout.xhtml">
+
+        <ui:define name="title">Customer Details</ui:define>
+
+
+        <ui:define name="heading">
+            <h2 style="background-color:#4a607a; color:#fff; padding:6px;">
+                Customer: #{customerBean.currentCustomer.name}
+            </h2>
+        </ui:define>
+
+
+        <ui:define name="content">
+
+            <!-- Customer Info -->
+            <h3>Details</h3>
+            <h:panelGrid columns="2" cellpadding="5" style="margin-bottom: 20px;">
+                <h:outputLabel value="ID:" />
+                <h:outputText value="#{customerBean.currentCustomer.id}">
+                    <f:convertNumber integerOnly="true" />
+                </h:outputText>
+
+                <h:outputLabel value="Name:" />
+                <h:outputText value="#{customerBean.currentCustomer.name}" />
+
+                <h:outputLabel value="Phone Number:" />
+                <h:outputText value="#{customerBean.currentCustomer.phoneNumber}" />
+
+                <h:outputLabel value="Address:" />
+                <h:outputText value="#{customerBean.currentCustomer.address}" />
+
+                <h:outputLabel value="Email address:" />
+                <h:outputText value="#{customerBean.currentCustomer.email}" />
+            </h:panelGrid>
+
+            <hr />
+            <!-- Orders Info -->
+            <h3>Orders (#{empty customer.orders ? 0 : customer.orders.size()})</h3>
+
+            <h:form>
+                <h:dataTable value="#{customer.orders}" var="order" border="1" cellpadding="4" style="width:100%;"
+                             rendered="#{not empty customer.orders}">
+                    <!-- Column 1: # -->
+                    <h:column>
+                        <f:facet name="header">#</f:facet>
+                        <h:outputText value="#{order.id}" />
+                    </h:column>
+
+                    <!-- Column 2: Time Created -->
+                    <h:column>
+                        <f:facet name="header">Time Created</f:facet>
+                        <h:outputText value="#{order.orderDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                        </h:outputText>
+                    </h:column>
+
+                    <!-- Column 3: Brand Model -->
+                    <h:column>
+                        <f:facet name="header">Brand Model</f:facet>
+                        <h:outputText value="#{order.productModel}" />
+                    </h:column>
+
+                    <!-- Column 4: Unit Price (calculated) -->
+                    <h:column>
+                        <f:facet name="header">Unit Price</f:facet>
+                        <h:outputText value="#{order.quantity != 0 ? (order.totalPrice / order.quantity) : 0}">
+                            <f:convertNumber type="currency" currencySymbol="$" />
+                        </h:outputText>
+                    </h:column>
+
+                    <!-- Column 5: Qty -->
+                    <h:column>
+                        <f:facet name="header">Qty</f:facet>
+                        <h:outputText value="#{order.quantity}" />
+                    </h:column>
+
+                    <!-- Column 6: Total Price -->
+                    <h:column>
+                        <f:facet name="header">Total Price</f:facet>
+                        <h:outputText value="#{order.totalPrice}">
+                            <f:convertNumber type="currency" currencySymbol="$" />
+                        </h:outputText>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+
+
+            <!-- Navigation Links -->
+            <h:panelGroup style="margin-top: 20px;">
+                <h:link value="Customer List" outcome="listCustomers" />
+                |
+                <h:link value="Order List" outcome="stockOrders" />
+                |
+                <h:link value="Main Page" outcome="dashboard" />
+            </h:panelGroup>
+
+        </ui:define>
+
+    </ui:composition>
+</html>

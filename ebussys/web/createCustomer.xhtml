@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="layout.xhtml">
+
+        <ui:define name="title">Create a New Customer</ui:define>
+
+        <ui:define name="heading">
+            <h2 style="background-color:#4a607a; color:#fff; padding:6px;">Create a New Customer</h2>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form id="createCustomerForm">
+                <h:messages globalOnly="true" />
+
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="name" value="Name:" />
+                    <h:inputText id="name" value="#{customerBean.currentCustomer.name}" required="true" />
+
+                    <h:outputLabel for="address" value="Address:" />
+                    <h:inputText id="address" value="#{customerBean.currentCustomer.address}" required="true" />
+
+                    <h:outputLabel for="phoneNumber" value="Phone Number:" />
+                    <h:inputText id="phoneNumber" value="#{customerBean.currentCustomer.phoneNumber}" required="true" />
+
+                    <h:outputLabel for="email" value="Email Address:" />
+                    <h:inputText id="email" value="#{customerBean.currentCustomer.email}" required="true" />
+                </h:panelGrid>
+
+                <br />
+                <h:commandButton value="Create Customer" action="#{customerBean.createCustomer}" />
+            </h:form>
+
+            <hr />
+            <h:link value="List of Customers" outcome="listCustomers" />
+            |
+            <h:link value="Main Page" outcome="dashboard" />
+        </ui:define>
+
+    </ui:composition>
+</html>

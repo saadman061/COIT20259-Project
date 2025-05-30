@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+    <ui:composition template="layout.xhtml">
+
+        <ui:define name="title">List of Customers</ui:define>
+
+        <ui:define name="heading">
+            <h2 style="background-color:#4a607a; color:#fff; padding:6px;">Customer List</h2>
+        </ui:define>
+
+        <ui:define name="content">
+
+            <h:messages globalOnly="true" />
+
+            <h:outputText rendered="#{not empty param.success}" value="#{param.message}" style="color:blue;" />
+
+            <!-- Wrap the dataTable in a form -->
+            <h:form>
+                <h:dataTable value="#{customerBean.allCustomers}" var="customer"
+                             style="border-collapse: collapse; border: 1px solid #DCDCDC;">
+                    <!-- Column: Name -->
+                    <h:column>
+                        <f:facet name="header">
+                            <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding: 4px; border: 1px solid #DCDCDC;">Name</div>
+                        </f:facet>
+                        <div style="padding: 4px; border: 1px solid #DCDCDC;">#{customer.name}</div>
+                    </h:column>
+
+                    <!-- Column: Address -->
+                    <h:column>
+                        <f:facet name="header">
+                            <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding: 4px; border: 1px solid #DCDCDC;">Address</div>
+                        </f:facet>
+                        <div style="padding: 4px; border: 1px solid #DCDCDC;">#{customer.address}</div>
+                    </h:column>
+
+                    <!-- Column: Order -->
+                    <h:column>
+                        <f:facet name="header">
+                            <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding: 4px; border: 1px solid #DCDCDC;">Order</div>
+                        </f:facet>
+                        <div style="padding: 4px; border: 1px solid #DCDCDC;">#{customer.orders}</div>
+                    </h:column>
+
+                    <!-- Column: Action -->
+                    <h:column>
+                        <f:facet name="header">
+                            <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding: 4px; border: 1px solid #DCDCDC;">Action</div>
+                        </f:facet>
+                        <div style="padding: 4px; border: 1px solid #DCDCDC;">
+                            <h:commandLink value="View Details" action="#{customerBean.viewCustomer(customer)}" />
+                        </div>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+
+
+
+            <br />
+            <h:outputText value="Total customers: #{fn:length(customerBean.allCustomers)}" />
+
+            <hr />
+            <h:link value="Create a New Customer" outcome="createCustomer" />
+            |
+            <h:link value="Main Page" outcome="dashboard" />
+
+        </ui:define>
+
+    </ui:composition>
+</html>
