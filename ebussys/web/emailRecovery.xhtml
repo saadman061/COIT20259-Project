@@ -12,16 +12,23 @@
 <ui:define name="content">
     
         <h:form>
-            <h:panelGrid columns="3">
-                
-                <h:outputLabel value="Email Address"/>
-                <h:inputText value="#{authBean.email}" required="true" requiredMessage="Please enter your email address!" id="email" />
-                <h:message errorStyle="color:red" for="email" />
-                
-                <h:commandButton value="Create Recovery Code" action="#{authBean.createRecoveryCode}" />
-                
-            </h:panelGrid>
-        </h:form>
+    <h:panelGrid columns="3">
+        <h:outputLabel for="email" value="Email Address" />
+
+        <h:panelGroup>
+            <h:inputText id="email" value="#{authBean.email}" required="true">
+                <f:validateRegex pattern="^[\w.%+-]+@[\w.-]+\.[A-Za-z]{2,}$" />
+            </h:inputText>
+            <h:commandButton value="Create Recovery Code" action="#{authBean.createRecoveryCode}" style="margin-left: 20px;"/>
+            <h:message for="email" style="display:none;" />
+            <h:outputText value="Please enter a valid email (e.g., user@example.com)"
+                          rendered="#{not empty facesContext.messageList}" 
+                          style="color:red;    margin-left: 20px;" />
+        </h:panelGroup>
+
+        
+    </h:panelGrid>
+</h:form>
 
 </ui:define>
 <ui:define name="footer">

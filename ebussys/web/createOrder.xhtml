@@ -22,7 +22,7 @@
                 <h:outputLabel for="email" value="Email:" />
                 <h:panelGroup>
                     <h:inputText id="email" value="#{orderBean.currentOrder.email}" required="true">
-                        <f:validateRegex pattern="^[\\w.%+-]+@[\\w.-]+\\.[A-Za-z]{2,}$" />
+                        <f:validateRegex pattern="^[\w.%+-]+@[\w.-]+\.[A-Za-z]{2,}$" />
                     </h:inputText>
                     <h:message for="email" style="display:none;" />
                     <h:outputText value="Please enter a valid email (e.g., user@example.com)"
