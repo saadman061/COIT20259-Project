@@ -98,7 +98,7 @@
             <f:facet name="header">
                 <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding:4px; border:1px solid #DCDCDC;">Total Price</div>
             </f:facet>
-            <h:outputText value="#{order.totalPrice}">
+            <h:outputText value="#{order.quantity * order.unitPrice}">
                 <f:convertNumber type="currency" currencySymbol="$" />
             </h:outputText>
         </h:column>

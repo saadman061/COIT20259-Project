@@ -45,7 +45,7 @@
                         <f:facet name="header">
                             <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding: 4px; border: 1px solid #DCDCDC;">Order</div>
                         </f:facet>
-                        <div style="padding: 4px; border: 1px solid #DCDCDC;">#{customer.orders}</div>
+                        <div style="padding: 4px; border: 1px solid #DCDCDC;">#{customer.getOrders().size()}</div>
                     </h:column>
 
                     <!-- Column: Action -->
