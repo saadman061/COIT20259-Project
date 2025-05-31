@@ -15,6 +15,9 @@
   </ui:define>
 
   <ui:define name="content">
+     <f:metadata>
+        <f:viewAction action="#{phoneBean.resetSearch}" />
+    </f:metadata>
     <h:form>
       <h:outputLabel for="searchModel" value="Model:" />
       <h:inputText id="searchModel" value="#{phoneBean.searchModel}" />

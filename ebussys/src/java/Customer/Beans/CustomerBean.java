@@ -108,12 +108,12 @@ public class CustomerBean implements Serializable {
     // Search for customers by name
     public void searchCustomers() {
         if (searchName == null || searchName.trim().isEmpty()) {
-            searchResults = em.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
+            searchResults = null; // no results shown if no input
         } else {
             searchResults = em.createQuery(
-                    "SELECT c FROM Customer c WHERE LOWER(c.name) LIKE :name", Customer.class)
-                    .setParameter("name", "%" + searchName.toLowerCase() + "%")
-                    .getResultList();
+                "SELECT c FROM Customer c WHERE LOWER(c.name) LIKE :name", Customer.class)
+                .setParameter("name", "%" + searchName.toLowerCase() + "%")
+                .getResultList();
         }
     }
 

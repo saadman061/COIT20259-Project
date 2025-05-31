@@ -13,6 +13,9 @@
   </ui:define>
 
   <ui:define name="content">
+     <f:metadata>
+        <f:viewAction action="#{orderBean.resetSearch}" />
+    </f:metadata>
     <h:form id="searchForm">
       <h:outputLabel for="searchID" value="Order #:" />
       <h:inputText id="searchID" value="#{orderBean.searchOrderId}" />

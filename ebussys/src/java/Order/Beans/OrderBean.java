@@ -195,7 +195,7 @@ public class OrderBean implements Serializable {
 
     public String searchOrders() {
         if (searchOrderId == null) {
-            searchResults = em.createQuery("SELECT o FROM Order o", Order.class).getResultList();
+            searchResults = null; // no results shown if no input
         } else {
             // Search by exact order ID
             Order found = em.find(Order.class, searchOrderId);

@@ -97,7 +97,7 @@ public class ProductBean implements Serializable {
 
     public void searchLaptops() {
         if (searchModel == null || searchModel.trim().isEmpty()) {
-            searchResults = em.createQuery("SELECT p FROM Laptop p", Laptop.class).getResultList();
+            searchResults = null; // no results shown if no input
         } else {
             searchResults = em.createQuery("SELECT p FROM Laptop p WHERE LOWER(p.model) LIKE :model", Laptop.class)
                     .setParameter("model", "%" + searchModel.toLowerCase() + "%")

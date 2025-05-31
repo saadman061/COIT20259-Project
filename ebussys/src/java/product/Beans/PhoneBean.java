@@ -110,7 +110,7 @@ public class PhoneBean implements Serializable {
     // Search phones by model
     public void searchPhones() {
         if (searchModel == null || searchModel.trim().isEmpty()) {
-            searchResults = em.createQuery("SELECT p FROM Phone p", Phone.class).getResultList();
+            searchResults = null; // no results shown if no input
         } else {
             searchResults = em.createQuery("SELECT p FROM Phone p WHERE LOWER(p.model) LIKE :model", Phone.class)
                     .setParameter("model", "%" + searchModel.toLowerCase() + "%")
