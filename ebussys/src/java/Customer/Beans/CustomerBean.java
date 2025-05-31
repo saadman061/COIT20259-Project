@@ -1,5 +1,7 @@
 package Customer.Beans;
 
+import Order.Beans.Order;
+import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
@@ -10,6 +12,8 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Named(value = "customerBean")

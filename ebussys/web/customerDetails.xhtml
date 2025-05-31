@@ -44,61 +44,74 @@
 
             <hr />
             <!-- Orders Info -->
-            <h3>Orders (#{empty customer.orders ? 0 : customer.orders.size()})</h3>
+            <h3>Orders (#{empty customer.orders ? 0 : customer.getOrders().size()})</h3>
 
             <h:form>
-                <h:dataTable value="#{customer.orders}" var="order" border="1" cellpadding="4" style="width:100%;"
-                             rendered="#{not empty customer.orders}">
-                    <!-- Column 1: # -->
-                    <h:column>
-                        <f:facet name="header">#</f:facet>
-                        <h:outputText value="#{order.id}" />
-                    </h:column>
+    <h:dataTable value="#{customerBean.currentCustomer.orders}" var="order" border="1" cellpadding="4" style="width:100%; border-collapse:collapse;">
 
-                    <!-- Column 2: Time Created -->
-                    <h:column>
-                        <f:facet name="header">Time Created</f:facet>
-                        <h:outputText value="#{order.orderDate}">
-                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-                        </h:outputText>
-                    </h:column>
+        <!-- Column 1: # -->
+        <h:column>
+            <f:facet name="header">
+                <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding:4px; border:1px solid #DCDCDC;">#</div>
+            </f:facet>
+            <h:outputText value="#{order.id}" />
+        </h:column>
 
-                    <!-- Column 3: Brand Model -->
-                    <h:column>
-                        <f:facet name="header">Brand Model</f:facet>
-                        <h:outputText value="#{order.productModel}" />
-                    </h:column>
+        <!-- Column 2: Time Created -->
+        <h:column>
+            <f:facet name="header">
+                <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding:4px; border:1px solid #DCDCDC;">Time Created</div>
+            </f:facet>
+            <h:outputText value="#{order.orderDate}">
+                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+            </h:outputText>
+        </h:column>
 
-                    <!-- Column 4: Unit Price (calculated) -->
-                    <h:column>
-                        <f:facet name="header">Unit Price</f:facet>
-                        <h:outputText value="#{order.quantity != 0 ? (order.totalPrice / order.quantity) : 0}">
-                            <f:convertNumber type="currency" currencySymbol="$" />
-                        </h:outputText>
-                    </h:column>
+        <!-- Column 3: Brand Model -->
+        <h:column>
+            <f:facet name="header">
+                <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding:4px; border:1px solid #DCDCDC;">Brand Model</div>
+            </f:facet>
+            <h:outputText value="#{order.productModel}" />
+        </h:column>
 
-                    <!-- Column 5: Qty -->
-                    <h:column>
-                        <f:facet name="header">Qty</f:facet>
-                        <h:outputText value="#{order.quantity}" />
-                    </h:column>
+        <!-- Column 4: Unit Price -->
+        <h:column>
+            <f:facet name="header">
+                <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding:4px; border:1px solid #DCDCDC;">Unit Price</div>
+            </f:facet>
+            <h:outputText value="#{order.unitPrice}">
+                <f:convertNumber type="currency" currencySymbol="$" />
+            </h:outputText>
+        </h:column>
 
-                    <!-- Column 6: Total Price -->
-                    <h:column>
-                        <f:facet name="header">Total Price</f:facet>
-                        <h:outputText value="#{order.totalPrice}">
-                            <f:convertNumber type="currency" currencySymbol="$" />
-                        </h:outputText>
-                    </h:column>
-                </h:dataTable>
-            </h:form>
+        <!-- Column 5: Qty -->
+        <h:column>
+            <f:facet name="header">
+                <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding:4px; border:1px solid #DCDCDC;">Qty</div>
+            </f:facet>
+            <h:outputText value="#{order.quantity}" />
+        </h:column>
+
+        <!-- Column 6: Total Price -->
+        <h:column>
+            <f:facet name="header">
+                <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding:4px; border:1px solid #DCDCDC;">Total Price</div>
+            </f:facet>
+            <h:outputText value="#{order.totalPrice}">
+                <f:convertNumber type="currency" currencySymbol="$" />
+            </h:outputText>
+        </h:column>
+    </h:dataTable>
+</h:form>
+
 
 
             <!-- Navigation Links -->
             <h:panelGroup style="margin-top: 20px;">
                 <h:link value="Customer List" outcome="listCustomers" />
                 |
-                <h:link value="Order List" outcome="stockOrders" />
+                <h:link value="Order List" outcome="listOrders" />
                 |
                 <h:link value="Main Page" outcome="dashboard" />
             </h:panelGroup>

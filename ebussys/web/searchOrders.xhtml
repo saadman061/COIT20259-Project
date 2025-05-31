@@ -9,13 +9,13 @@
   <ui:define name="title">Search Orders</ui:define>
 
   <ui:define name="heading">
-    <h2 style="background-color:#4a607a; color:#fff; padding:6px;">Search Orders by Email</h2>
+    <h2 style="background-color:#4a607a; color:#fff; padding:6px;">Search Orders by Order ID</h2>
   </ui:define>
 
   <ui:define name="content">
-    <h:form>
-      <h:outputLabel for="searchEmail" value="Customer Email:" />
-      <h:inputText id="searchEmail" value="#{orderBean.searchEmail}" />
+    <h:form id="searchForm">
+      <h:outputLabel for="searchID" value="Order #:" />
+      <h:inputText id="searchID" value="#{orderBean.searchOrderId}" />
       <br /><br />
       <h:commandButton value="Search" action="#{orderBean.searchOrders}" />
       <h:commandButton value="Reset" action="#{orderBean.resetSearch}" immediate="true" />
@@ -23,16 +23,36 @@
 
     <br />
 
-    <h:dataTable value="#{orderBean.searchResults}" var="o" border="1" cellpadding="4" rendered="#{not empty orderBean.searchResults}">
-      <h:column><f:facet name="header"><b>Customer</b></f:facet>#{o.customerName}</h:column>
-      <h:column><f:facet name="header"><b>Email</b></f:facet>#{o.email}</h:column>
-      <h:column><f:facet name="header"><b>Model</b></f:facet>#{o.productModel}</h:column>
-      <h:column><f:facet name="header"><b>Qty</b></f:facet>#{o.quantity}</h:column>
-      <h:column><f:facet name="header"><b>Total</b></f:facet>$#{o.totalPrice}</h:column>
-      <h:column><f:facet name="header"><b>Date</b></f:facet>
+    <h:dataTable value="#{orderBean.searchResults}" var="o" border="1" cellpadding="4" rendered="#{not empty orderBean.searchResults}" style="width:100%">
+      <h:column>
+        <f:facet name="header"><b>Order #</b></f:facet>
+        #{o.id}
+      </h:column>
+      <h:column>
+        <f:facet name="header"><b>Customer</b></f:facet>
+        #{o.customer.name}
+      </h:column>
+      <h:column>
+        <f:facet name="header"><b>Device</b></f:facet>
+        #{o.productModel}
+      </h:column>
+      <h:column>
+        <f:facet name="header"><b>Created At</b></f:facet>
         <h:outputText value="#{o.orderDate}">
           <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
         </h:outputText>
+      </h:column>
+      <h:column>
+        <f:facet name="header"><b>Unit Price</b></f:facet>
+        #{o.unitPrice}
+      </h:column>
+      <h:column>
+        <f:facet name="header"><b>Quantity</b></f:facet>
+        #{o.quantity}
+      </h:column>
+      <h:column>
+        <f:facet name="header"><b>Total Price</b></f:facet>
+        #{o.quantity * o.unitPrice} <!-- Assuming you add unitPrice field -->
       </h:column>
     </h:dataTable>
 

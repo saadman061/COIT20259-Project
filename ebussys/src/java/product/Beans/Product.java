@@ -13,12 +13,14 @@ import jakarta.persistence.Table;
 
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
-
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
 
 
 @Entity
 @Table(name = "PRODUCT")
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 public abstract class Product implements Serializable {
 
     @Id

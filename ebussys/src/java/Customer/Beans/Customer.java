@@ -17,12 +17,15 @@ public class Customer implements Serializable {
     private String address;
     private String phoneNumber;
     private String email;
-    private int orders;
 
-    public Customer() {
-    }
+    // One customer → Many orders
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Order> orders;
+
+    public Customer() {}
 
     // Getters and setters
+
     public Long getId() {
         return id;
     }
@@ -59,11 +62,11 @@ public class Customer implements Serializable {
         this.email = email;
     }
 
-    public int getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(int orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
 }

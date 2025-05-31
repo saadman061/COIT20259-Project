@@ -1,11 +1,6 @@
 package Order.Beans;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-
+import Customer.Beans.Customer;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -16,39 +11,71 @@ public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    private String customerName;
-    private String email;
     private String productModel;
     private int quantity;
-    private double totalPrice;
-
+    private double unitPrice;
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
+
+    // Many orders → One customer
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false) // FK in orders table
+    private Customer customer;
 
     public Order() {
         this.orderDate = new Date();
     }
 
     // Getters and setters
-    public Long getId() { return id; }
 
-    public String getCustomerName() { return customerName; }
-    public void setCustomerName(String customerName) { this.customerName = customerName; }
+    public int getId() {
+        return id;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getProductModel() { return productModel; }
-    public void setProductModel(String productModel) { this.productModel = productModel; }
+    public String getProductModel() {
+        return productModel;
+    }
 
-    public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public void setProductModel(String productModel) {
+        this.productModel = productModel;
+    }
 
-    public double getTotalPrice() { return totalPrice; }
-    public void setTotalPrice(double totalPrice) { this.totalPrice = totalPrice; }
+    public int getQuantity() {
+        return quantity;
+    }
 
-    public Date getOrderDate() { return orderDate; }
-    public void setOrderDate(Date orderDate) { this.orderDate = orderDate; }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }
