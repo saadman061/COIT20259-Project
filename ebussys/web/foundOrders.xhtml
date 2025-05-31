@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<ui:composition template="layout.xhtml">
+
+  <ui:define name="title">Found Orders</ui:define>
+
+  <ui:define name="heading">
+    <h2 style="background-color:#4a607a; color:#fff; padding:6px;">The found orders</h2>
+  </ui:define>
+
+  <ui:define name="content">
+
+    <style>
+      /* Style for fixed layout and consistent columns */
+      .fixed-table {
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .fixed-table th, .fixed-table td, .fixed-table div.cell-content {
+        padding: 4px;
+        border: 1px solid #DCDCDC;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+      }
+      /* Optional: max-width per column */
+      .fixed-table th:nth-child(1), .fixed-table td:nth-child(1) { max-width: 60px; }
+      .fixed-table th:nth-child(2), .fixed-table td:nth-child(2) { max-width: 150px; }
+      .fixed-table th:nth-child(3), .fixed-table td:nth-child(3) { max-width: 150px; }
+      .fixed-table th:nth-child(4), .fixed-table td:nth-child(4) { max-width: 130px; }
+      .fixed-table th:nth-child(5), .fixed-table td:nth-child(5) { max-width: 100px; }
+      .fixed-table th:nth-child(6), .fixed-table td:nth-child(6) { max-width: 80px; }
+      .fixed-table th:nth-child(7), .fixed-table td:nth-child(7) { max-width: 100px; }
+    </style>
+
+    <div style="overflow-x:auto;">
+      <h:dataTable value="#{orderBean.searchResults}" var="o"
+                   border="0" cellpadding="0" cellspacing="0"
+                   styleClass="fixed-table"
+                   rendered="#{not empty orderBean.searchResults}">
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; font-weight:bold; padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">Order #</div>
+          </f:facet>
+          <div class="cell-content">#{o.id}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; font-weight:bold; padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">Customer</div>
+          </f:facet>
+          <div class="cell-content">#{o.customer.name}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; font-weight:bold; padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">Device</div>
+          </f:facet>
+          <div class="cell-content">#{o.productModel}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; font-weight:bold; padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">Created At</div>
+          </f:facet>
+          <div class="cell-content">
+            <h:outputText value="#{o.orderDate}">
+              <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+            </h:outputText>
+          </div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; font-weight:bold; padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">Unit Price</div>
+          </f:facet>
+          <div class="cell-content">
+            $ <h:outputText value="#{o.unitPrice}">
+              <f:convertNumber groupingUsed="true" maxFractionDigits="2" minFractionDigits="2" />
+            </h:outputText>
+          </div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; font-weight:bold; padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">Quantity</div>
+          </f:facet>
+          <div class="cell-content">#{o.quantity}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; font-weight:bold; padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">Total Price</div>
+          </f:facet>
+          <div class="cell-content" style="font-weight:bold;">
+            $ <h:outputText value="#{o.quantity * o.unitPrice}">
+              <f:convertNumber groupingUsed="true" maxFractionDigits="2" minFractionDigits="2" />
+            </h:outputText>
+          </div>
+        </h:column>
+
+      </h:dataTable>
+
+      <h:outputText value="No Orders found." styleClass="no-record"
+                  rendered="#{empty orderBean.searchResults}" />
+    </div>
+
+    <br/>
+    <h:outputText rendered="#{not empty orderBean.searchResults}" value="Total orders: #{fn:length(orderBean.searchResults)}" />
+
+    <hr/>
+    <h:link value="Create a new Order" outcome="createOrder.xhtml" />
+    |
+    <h:link value="Main Page" outcome="dashboard.xhtml" />
+
+  </ui:define>
+
+</ui:composition>
+</html>

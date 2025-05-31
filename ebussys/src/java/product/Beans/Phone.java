@@ -1,48 +1,82 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package product.beans;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
+
 /**
- *
- * @author Ronak
+ * Entity representing the Phone product.
+ * Subclass of Product using JOINED inheritance strategy.
+ * This class stores phone-specific properties like cellular connectivity,
+ * location features, and SIM card type.
+ * 
+ * Mapped to the "PHONE" table in the database.
+ * The primary key is joined with the superclass Product via "id".
+ * 
+ * Author: Ronak
  */
 @Entity
 @Table(name = "PHONE")
-@PrimaryKeyJoinColumn(name = "id")
+@PrimaryKeyJoinColumn(name = "id")  // Joins with PRODUCT's primary key
 public class Phone extends Product {
 
-    private String simType;
-    private String cellularConnectivity;
-    private String locationFeatures;
+    /** Cellular connectivity information, e.g., "4G", "5G" */
+    private String cellular;
 
+    /** Location features, e.g., GPS */
+    private String location;
+
+    /** SIM card type, e.g., "Nano", "Micro" */
+    private String simCard;
+
+    /** Default constructor */
     public Phone() {}
 
-    // Getters and Setters
-    public String getSimType() {
-        return simType;
+    /**
+     * Gets the cellular connectivity type.
+     * @return cellular cellular connectivity description
+     */
+    public String getCellular() {
+        return cellular;
     }
 
-    public void setSimType(String simType) {
-        this.simType = simType;
+    /**
+     * Sets the cellular connectivity type.
+     * @param cellular cellular connectivity description
+     */
+    public void setCellular(String cellular) {
+        this.cellular = cellular;
     }
 
-    public String getCellularConnectivity() {
-        return cellularConnectivity;
+    /**
+     * Gets the location feature description.
+     * @return location location features (e.g., GPS)
+     */
+    public String getLocation() {
+        return location;
     }
 
-    public void setCellularConnectivity(String cellularConnectivity) {
-        this.cellularConnectivity = cellularConnectivity;
+    /**
+     * Sets the location feature description.
+     * @param location location features (e.g., GPS)
+     */
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public String getLocationFeatures() {
-        return locationFeatures;
+    /**
+     * Gets the SIM card type.
+     * @return simCard SIM card type description
+     */
+    public String getSimCard() {
+        return simCard;
     }
 
-    public void setLocationFeatures(String locationFeatures) {
-        this.locationFeatures = locationFeatures;
+    /**
+     * Sets the SIM card type.
+     * @param simCard SIM card type description
+     */
+    public void setSimCard(String simCard) {
+        this.simCard = simCard;
     }
 }

@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<ui:composition template="layout.xhtml">
+
+  <ui:define name="title">Found Phones</ui:define>
+
+  <ui:define name="heading">
+    <h2 style="background-color:#4a607a; color:#fff; padding:6px;">The found phones</h2>
+  </ui:define>
+
+  <ui:define name="content">
+
+    <style>
+      /* Table and cell styles for fixed layout and ellipsis */
+      .fixed-table {
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .fixed-table th, .fixed-table td, .fixed-table div.cell-content {
+        padding: 4px;
+        border: 1px solid #DCDCDC;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 120px;
+        vertical-align: middle;
+      }
+      /* Customize max-width per column */
+      .fixed-table th:nth-child(1), .fixed-table td:nth-child(1), 
+      .fixed-table div.cell-brand { max-width: 100px; }
+      .fixed-table th:nth-child(2), .fixed-table td:nth-child(2), 
+      .fixed-table div.cell-model { max-width: 150px; }
+      .fixed-table th:nth-child(3), .fixed-table td:nth-child(3), 
+      .fixed-table div.cell-displaySize { max-width: 80px; }
+      /* Add other columns as needed */
+    </style>
+
+    <div style="overflow-x:auto;">
+      <h:dataTable value="#{phoneBean.searchResults}" var="phone"
+                   border="0" cellpadding="0" cellspacing="0"
+                   styleClass="fixed-table"
+                   rendered="#{not empty phoneBean.searchResults}">
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Brand</div>
+          </f:facet>
+          <div class="cell-content cell-brand">#{empty phone.brand ? '—' : phone.brand}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Model</div>
+          </f:facet>
+          <div class="cell-content cell-model">#{empty phone.model ? '—' : phone.model}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Display Size</div>
+          </f:facet>
+          <div class="cell-content cell-displaySize">#{empty phone.displaySize ? '—' : phone.displaySize}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Weight (gram)</div>
+          </f:facet>
+          <div class="cell-content">#{empty phone.weight ? '—' : phone.weight}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Operating System</div>
+          </f:facet>
+          <div class="cell-content">#{empty phone.operatingSystem ? '—' : phone.operatingSystem}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Camera</div>
+          </f:facet>
+          <div class="cell-content">#{empty phone.camera ? '—' : phone.camera}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Wi-Fi</div>
+          </f:facet>
+          <div class="cell-content">#{empty phone.wifi ? '—' : phone.wifi}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Price</div>
+          </f:facet>
+          <div class="cell-content">
+            $ <h:outputText value="#{phone.price}">
+                <f:convertNumber type="currency" currencySymbol="" groupingUsed="true" maxFractionDigits="2" minFractionDigits="2" />
+              </h:outputText>
+          </div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Description</div>
+          </f:facet>
+          <div class="cell-content">#{empty phone.description ? '—' : phone.description}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Stock Number</div>
+          </f:facet>
+          <div class="cell-content">#{empty phone.stockNumber ? '—' : phone.stockNumber}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Cellular Connectivity</div>
+          </f:facet>
+          <div class="cell-content">#{empty phone.cellular ? '—' : phone.cellular}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Location</div>
+          </f:facet>
+          <div class="cell-content">#{empty phone.location ? '—' : phone.location}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Sim Card</div>
+          </f:facet>
+          <div class="cell-content">#{empty phone.simCard ? '—' : phone.simCard}</div>
+        </h:column>
+
+      </h:dataTable>
+
+      <h:outputText value="No Phones found." styleClass="no-record"
+                  rendered="#{empty phoneBean.searchResults}" />
+    </div>
+
+    <br/>
+    <h:outputText rendered="#{not empty phoneBean.searchResults}" value="Total phones: #{fn:length(phoneBean.searchResults)}" />
+
+    <hr/>
+    <h:link value="Create a Phone" outcome="createPhone.xhtml" />
+    |
+    <h:link value="Main Page" outcome="dashboard.xhtml" />
+
+  </ui:define>
+
+</ui:composition>
+</html>

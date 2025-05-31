@@ -47,6 +47,15 @@
 
         <h:outputLabel for="stockNumber" value="Stock Number:" />
         <h:inputText id="stockNumber" value="#{phoneBean.currentPhone.stockNumber}" />
+        
+        <h:outputLabel for="cellularConnectivity" value="Cellular Connectivity:" />
+        <h:inputText id="cellular" value="#{phoneBean.currentPhone.cellular}" />
+        
+        <h:outputLabel for="location" value="Location:" />
+        <h:inputText id="location" value="#{phoneBean.currentPhone.location}" />
+        
+        <h:outputLabel for="simCard" value="Sim Card:" />
+        <h:inputText id="simCard" value="#{phoneBean.currentPhone.simCard}" />
 
 
 
@@ -54,7 +63,7 @@
       </h:panelGrid>
 
       <br />
-      <h:commandButton value="Create Phone" action="#{phoneBean.createPhone}" />
+      <h:commandButton value="Create a phone" action="#{phoneBean.createPhone}" />
     </h:form>
 
     <hr />

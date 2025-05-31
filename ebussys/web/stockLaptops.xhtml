@@ -15,7 +15,7 @@
   <ui:define name="title">Laptop Stock</ui:define>
 
   <ui:define name="heading">
-    <h2 style="background-color:#4a607a; color:#fff; padding:6px;">Laptop Stock</h2>
+    <h2 style="background-color:#4a607a; color:#fff; padding:6px;">The Stock of Laptops</h2>
   </ui:define>
 
   <ui:define name="content">
@@ -23,43 +23,23 @@
     <h:messages globalOnly="true" />
 
     <h:outputText rendered="#{not empty param.success}" value="#{param.message}" style="color:blue;" />
+<h:dataTable value="#{productBean.allLaptops}" var="product" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+  <h:column>
+    <f:facet name="header">
+      <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">Brand</div>
+    </f:facet>
+    <div style="padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">#{product.brand}</div>
+  </h:column>
 
-    <h:dataTable value="#{productBean.allLaptops}" var="product" border="1" cellpadding="4" style="width:100%;">
-      <h:column>
-        <f:facet name="header"><b>Brand</b></f:facet>
-        #{product.brand}
-      </h:column>
+ <h:column>
+  <f:facet name="header">
+    <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">Model</div>
+  </f:facet>
+  <div style="padding:4px; border:1px solid #DCDCDC; white-space: nowrap; color:blue; text-decoration:underline;">#{product.model}</div>
+</h:column>
 
-      <h:column>
-        <f:facet name="header"><b>Model</b></f:facet>
-        #{product.model}
-      </h:column>
+</h:dataTable>
 
-      <h:column>
-        <f:facet name="header"><b>Display Size</b></f:facet>
-        #{product.displaySize}
-      </h:column>
-
-      <h:column>
-        <f:facet name="header"><b>Weight (gram)</b></f:facet>
-        #{product.weight}
-      </h:column>
-
-      <h:column>
-        <f:facet name="header"><b>OS</b></f:facet>
-        #{product.operatingSystem}
-      </h:column>
-
-      <h:column>
-        <f:facet name="header"><b>Network</b></f:facet>
-        #{product.networkInterface}
-      </h:column>
-
-      <h:column>
-        <f:facet name="header"><b>Stock</b></f:facet>
-        #{product.stockNumber}
-      </h:column>
-    </h:dataTable>
 
     <br />
     <h:outputText value="Total laptops: #{fn:length(productBean.allLaptops)}" />

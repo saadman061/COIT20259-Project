@@ -44,7 +44,7 @@
 
             <hr />
             <!-- Orders Info -->
-            <h3>Orders (#{empty customer.orders ? 0 : customer.getOrders().size()})</h3>
+           <h3>Orders (#{empty customerBean.currentCustomer.orders ? 0 : customerBean.currentCustomer.orders.size()})</h3>
 
             <h:form>
     <h:dataTable value="#{customerBean.currentCustomer.orders}" var="order" border="1" cellpadding="4" style="width:100%; border-collapse:collapse;">

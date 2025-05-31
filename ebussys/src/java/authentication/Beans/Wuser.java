@@ -13,6 +13,10 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
+/**
+ *
+ * @author saad_
+ */
 @Entity
 @Table(name = "WUSER")
 @NamedQueries( {@NamedQuery(name = "Wuser.findById", query = "SELECT w FROM Wuser w WHERE w.id = :id"), 
@@ -42,13 +46,31 @@ public class Wuser implements Serializable {
     @Column(name = "EMAIL", nullable = false)
     private String email;
     /* Creates a new instance of Wuser */
+
+    /**
+     *
+     */
+
     public Wuser() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public Wuser(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param firstname
+     * @param lastname
+     * @param username
+     * @param password
+     * @param email
+     */
     public Wuser(Integer id, String firstname, String lastname, String username, String password, String email) {
         this.id = id;
         this.firstname = firstname;
@@ -58,69 +80,134 @@ public class Wuser implements Serializable {
         this.email=email;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getId() {
         return this.id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getFirstname() {
         return this.firstname;
     }
 
+    /**
+     *
+     * @param firstname
+     */
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getLastname() {
         return this.lastname;
     }
 
+    /**
+     *
+     * @param lastname
+     */
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUsername() {
         return this.username;
     }
 
+    /**
+     *
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPassword() {
         return this.password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
 
         this.password = password;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getSince() {
         return this.since;
     }
 
+    /**
+     *
+     * @param since
+     */
     public void setSince(Date since) {
         this.since = since;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     *
+     * @return
+     */
     public int hashCode() {
         int hash = 0;
         hash += (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
 
+    /**
+     *
+     * @param object
+     * @return
+     */
     public boolean equals(Object object) {
         if (object == null || !this.getClass().equals(object.getClass())) {
             return false;
@@ -130,6 +217,10 @@ public class Wuser implements Serializable {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public String toString() {
         return "" + this.id;
     }

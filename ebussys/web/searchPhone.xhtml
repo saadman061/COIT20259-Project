@@ -1,12 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
-<ui:composition template="layout.xhtml">
+<ui:composition template="layout.xhtml"
+                 xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
   <ui:define name="title">Search for a Phone</ui:define>
 
@@ -15,44 +12,17 @@
   </ui:define>
 
   <ui:define name="content">
-     <f:metadata>
-        <f:viewAction action="#{phoneBean.resetSearch}" />
-    </f:metadata>
     <h:form>
       <h:outputLabel for="searchModel" value="Model:" />
       <h:inputText id="searchModel" value="#{phoneBean.searchModel}" />
       <br /><br />
-      <h:commandButton value="Search" action="#{phoneBean.searchPhones}" />
-      <h:commandButton value="Reset" action="#{phoneBean.resetSearch}" immediate="true" />
+      <h:commandButton value="Search for a phone" action="#{phoneBean.searchAndRedirect}" />
     </h:form>
 
-    <br />
-
-    <h:dataTable value="#{phoneBean.searchResults}" var="phone" border="1" cellpadding="4" rendered="#{not empty phoneBean.searchResults}">
-      <h:column><f:facet name="header"><b>Brand</b></f:facet>#{phone.brand}</h:column>
-      <h:column><f:facet name="header"><b>Model</b></f:facet>#{phone.model}</h:column>
-      <h:column><f:facet name="header"><b>Display Size</b></f:facet>#{phone.displaySize}</h:column>
-      <h:column><f:facet name="header"><b>Weight(gram)</b></f:facet>#{phone.weight}</h:column>
-      <h:column><f:facet name="header"><b>Operating System</b></f:facet>#{phone.operatingSystem}</h:column>
-      <h:column><f:facet name="header"><b>Camera</b></f:facet>#{phone.camera}</h:column>
-      <h:column><f:facet name="header"><b>Wi-Fi</b></f:facet>#{phone.wifi}</h:column>
-      <h:column><f:facet name="header"><b>Price</b></f:facet>#{phone.price}</h:column>
-      <h:column><f:facet name="header"><b>Description</b></f:facet>#{phone.description}</h:column>
-      <h:column><f:facet name="header"><b>Stock Number</b></f:facet>#{phone.stockNumber}</h:column>
-      <h:column><f:facet name="header"><b>SIM Type</b></f:facet>#{phone.simType}</h:column>
-      <h:column><f:facet name="header"><b>Cellular</b></f:facet>#{phone.cellularConnectivity}</h:column>
-      <h:column><f:facet name="header"><b>Location Features</b></f:facet>#{phone.locationFeatures}</h:column>
-    </h:dataTable>
-
-    <h:outputText rendered="#{not empty phoneBean.searchResults}" value="Total phones: #{fn:length(phoneBean.searchResults)}" />
-
     <hr />
-    <h:link value="Create a Phone" outcome="createPhone.xhtml" />
-    |
-    <h:link value="Phone Stock" outcome="stockPhones.xhtml" />
+    <h:link value="The Stock of Phones" outcome="stockPhones.xhtml" />
     |
     <h:link value="Main Page" outcome="dashboard.xhtml" />
   </ui:define>
 
 </ui:composition>
-</html>

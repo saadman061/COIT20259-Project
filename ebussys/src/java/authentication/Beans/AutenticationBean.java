@@ -23,6 +23,10 @@ import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import java.util.Random;
 
+/**
+ *
+ * @author saad_
+ */
 @Named (value="authBean") 
 @SessionScoped
 public class AutenticationBean implements Serializable {
@@ -53,75 +57,195 @@ public class AutenticationBean implements Serializable {
         1. consisting of first name, last name, username, password, email and since date
         2. providing JPQL queries based on the above attributes*/
     private Wuser ruser;
+
+    /**
+     *
+     */
     public AutenticationBean() {
     }
+
+    /**
+     *
+     * @return
+     */
     public boolean isLogged() {
         return Logged;
     }
+
+    /**
+     *
+     * @param Logged
+     */
     public void setLogged(boolean Logged) {
         this.Logged = Logged;
     }
+
+    /**
+     *
+     * @return
+     */
     public String getUsername() {
         return username;
     }
+
+    /**
+     *
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
+
+    /**
+     *
+     * @return
+     */
     public String getPassword() {
         return password;
     }
+
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
+
+    /**
+     *
+     * @return
+     */
     public String getPasswordv() {
         return passwordv;
     }
+
+    /**
+     *
+     * @param passwordv
+     */
     public void setPasswordv(String passwordv) {
         this.passwordv = passwordv;
     }
+
+    /**
+     *
+     * @return
+     */
     public String getFname() {
         return fname;
     }
+
+    /**
+     *
+     * @param fname
+     */
     public void setFname(String fname) {
         this.fname = fname;
     }
+
+    /**
+     *
+     * @return
+     */
     public String getLname() {
         return lname;
     }
+
+    /**
+     *
+     * @param lname
+     */
     public void setLname(String lname) {
         this.lname = lname;
     }
+
+    /**
+     *
+     * @return
+     */
     public String getEmail() {
         return email;
     }
+
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
+
+    /**
+     *
+     * @return
+     */
     public String getVerificationcode() {
         return verificationcode;
     }
+
+    /**
+     *
+     * @param verificationcode
+     */
     public void setVerificationcode(String verificationcode) {
         this.verificationcode = verificationcode;
     }
+
+    /**
+     *
+     * @return
+     */
     public String getVerificationcode1() {
         return verificationcode1;
     }
+
+    /**
+     *
+     * @param verificationcode1
+     */
     public void setVerificationcode1(String verificationcode1) {
         this.verificationcode1 = verificationcode1;
     }
+
+    /**
+     *
+     * @return
+     */
     public boolean isRecovery() {
         return recovery;
     }
+
+    /**
+     *
+     * @param recovery
+     */
     public void setRecovery(boolean recovery) {
         this.recovery = recovery;
     }
+
+    /**
+     *
+     * @return
+     */
     public Wuser getRuser() {
         return ruser;
     }
+
+    /**
+     *
+     * @param ruser
+     */
     public void setRuser(Wuser ruser) {
         this.ruser = ruser;
     }
     //Generate the hash code of a password
+
+    /**
+     *
+     * @param oripassword
+     * @return
+     */
     public String HashConvert(String oripassword) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
@@ -140,6 +264,12 @@ public class AutenticationBean implements Serializable {
     /*Validate an existing user by checking
         1. if the user is a registered user
         2. if the username and password are correct*/
+
+    /**
+     *
+     * @return
+     */
+
     public String validateUser() {
         FacesContext context = FacesContext.getCurrentInstance();
         Wuser user = getUser();
@@ -163,6 +293,11 @@ public class AutenticationBean implements Serializable {
         }
     }
     /*Recover a user by email address*/
+
+    /**
+     *
+     */
+
     public void recoverUser() {
         FacesContext context = FacesContext.getCurrentInstance();
         Wuser user = getUserbyEmail();
@@ -197,12 +332,22 @@ public class AutenticationBean implements Serializable {
         }
     }
     //Generate a recovery string of 20 character length 
+
+    /**
+     *
+     * @return
+     */
     public String createRecoveryCode(){
         recovery=true;
         String urpage=createRandomCode();
         return urpage;
     }
     //Generate a verification ccode for a new user who is registering
+
+    /**
+     *
+     * @return
+     */
     public String createVerificationCode(){
         recovery=false;
         Wuser usr=this.getUserbyEmail();
@@ -220,6 +365,11 @@ public class AutenticationBean implements Serializable {
         }
     }
     //Generate a random verification code and send it to the user's email address
+
+    /**
+     *
+     * @return
+     */
     public String createRandomCode() {
         //The sending of email uses a fake SMTP server
         Properties props = new Properties();
@@ -255,6 +405,11 @@ public class AutenticationBean implements Serializable {
         
     }
     //Generate a random string of length of 20 characters
+
+    /**
+     *
+     * @return
+     */
     public String genVerificationCode() {
         //The character pool
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -273,6 +428,11 @@ public class AutenticationBean implements Serializable {
         return saltStr;
     }
     //Register a user into database
+
+    /**
+     *
+     * @return
+     */
     public String createUser() {
         FacesContext context = FacesContext.getCurrentInstance();
         Wuser wuser = getUser();
@@ -338,6 +498,11 @@ public class AutenticationBean implements Serializable {
         }
     }
     //Reset a user from the recovery procedure
+
+    /**
+     *
+     * @return
+     */
     public String resetUser() {
         FacesContext context = FacesContext.getCurrentInstance();
         if (!password.equals(passwordv)) {

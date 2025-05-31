@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<ui:composition template="layout.xhtml">
+
+  <ui:define name="title">Found Customers</ui:define>
+
+  <ui:define name="heading">
+    <h2 style="background-color:#4a607a; color:#fff; padding:6px;">The found customers</h2>
+  </ui:define>
+
+  <ui:define name="content">
+
+    <style>
+      .fixed-table {
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .fixed-table th, .fixed-table td {
+        border: 1px solid #DCDCDC;
+        padding: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+      }
+      .fixed-table th {
+        background-color: #DCDCDC;
+        font-weight: bold;
+      }
+      .link-style {
+        color: blue;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    </style>
+
+    <h:form>
+      <h:dataTable value="#{customerBean.searchResults}" var="customer"
+                   styleClass="fixed-table"
+                   rendered="#{not empty customerBean.searchResults}">
+
+        <h:column>
+          <f:facet name="header">Name</f:facet>
+          <h:outputText value="#{customer.name}" />
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">Address</f:facet>
+          <h:outputText value="#{customer.address}" />
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">Orders</f:facet>
+          <h:outputText value="#{customer.orders.size()}" />
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">Action</f:facet>
+          <h:commandLink value="View Details" action="#{customerBean.viewCustomer(customer)}" styleClass="link-style" />
+        </h:column>
+
+      </h:dataTable>
+      <h:outputText value="No customers found." styleClass="no-record"
+                  rendered="#{empty customerBean.searchResults}" />
+                  
+    </h:form>
+
+    <br />
+    <h:outputText rendered="#{not empty customerBean.searchResults}" value="Total customers: #{fn:length(customerBean.searchResults)}" />
+
+    <hr />
+    <h:link value="Create a New Customer" outcome="createCustomer" />
+    |
+    <h:link value="Main Page" outcome="dashboard" />
+
+  </ui:define>
+
+</ui:composition>
+</html>

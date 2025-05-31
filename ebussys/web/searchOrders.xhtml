@@ -3,66 +3,25 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
-  <ui:define name="title">Search Orders</ui:define>
+  <ui:define name="title">Search for an Order</ui:define>
 
   <ui:define name="heading">
-    <h2 style="background-color:#4a607a; color:#fff; padding:6px;">Search Orders by Order ID</h2>
+    <h2 style="background-color:#4a607a; color:#fff; padding:6px;">Search for an Order</h2>
   </ui:define>
 
   <ui:define name="content">
-     <f:metadata>
-        <f:viewAction action="#{orderBean.resetSearch}" />
-    </f:metadata>
-    <h:form id="searchForm">
-      <h:outputLabel for="searchID" value="Order #:" />
-      <h:inputText id="searchID" value="#{orderBean.searchOrderId}" />
+    <h:form>
+      <h:outputLabel for="searchOrderId" value="Order #:" />
+      <h:inputText id="searchOrderId" value="#{orderBean.searchOrderId}" />
       <br /><br />
-      <h:commandButton value="Search" action="#{orderBean.searchOrders}" />
-      <h:commandButton value="Reset" action="#{orderBean.resetSearch}" immediate="true" />
+      <!-- Redirect to foundOrders.xhtml with search results -->
+      <h:commandButton value="Search for an Order" action="#{orderBean.searchAndRedirect}" />
     </h:form>
 
-    <br />
-
-    <h:dataTable value="#{orderBean.searchResults}" var="o" border="1" cellpadding="4" rendered="#{not empty orderBean.searchResults}" style="width:100%">
-      <h:column>
-        <f:facet name="header"><b>Order #</b></f:facet>
-        #{o.id}
-      </h:column>
-      <h:column>
-        <f:facet name="header"><b>Customer</b></f:facet>
-        #{o.customer.name}
-      </h:column>
-      <h:column>
-        <f:facet name="header"><b>Device</b></f:facet>
-        #{o.productModel}
-      </h:column>
-      <h:column>
-        <f:facet name="header"><b>Created At</b></f:facet>
-        <h:outputText value="#{o.orderDate}">
-          <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-        </h:outputText>
-      </h:column>
-      <h:column>
-        <f:facet name="header"><b>Unit Price</b></f:facet>
-        #{o.unitPrice}
-      </h:column>
-      <h:column>
-        <f:facet name="header"><b>Quantity</b></f:facet>
-        #{o.quantity}
-      </h:column>
-      <h:column>
-        <f:facet name="header"><b>Total Price</b></f:facet>
-        #{o.quantity * o.unitPrice} <!-- Assuming you add unitPrice field -->
-      </h:column>
-    </h:dataTable>
-
-    <h:outputText rendered="#{not empty orderBean.searchResults}" value="Total orders: #{fn:length(orderBean.searchResults)}" />
-
     <hr />
-    <h:link value="Place a New Order" outcome="createOrder.xhtml" />
+    <h:link value="List of Orders" outcome="listOrders.xhtml" />
     |
     <h:link value="Main Page" outcome="dashboard.xhtml" />
   </ui:define>

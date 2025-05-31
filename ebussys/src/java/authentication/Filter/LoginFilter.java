@@ -12,15 +12,32 @@ import jakarta.servlet.http.HttpServletResponse;
 import Authentication.Beans.AutenticationBean;
 import jakarta.inject.Inject;
 
+/**
+ *
+ * @author saad_
+ */
 public class LoginFilter implements Filter {
     
     //Use the following for GlassFish 7.0.9  
     @Inject
     AutenticationBean session;
 
+    /**
+     *
+     * @param filterConfig
+     * @throws ServletException
+     */
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {  }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @param chain
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
        HttpServletRequest req = (HttpServletRequest) request;
@@ -29,7 +46,7 @@ public class LoginFilter implements Filter {
         //Retrieve the authtication bean
        //AutenticationBean session = (AutenticationBean) req.getSession(true).getAttribute("authBean");
        //Any after login accessible pages should be listed here
-       String[] afterLog = {"logout.xhtml", "dashboard.xhtml", "createLaptop.xhtml", "stockLaptops.xhtml","searchLaptop.xhtml"};
+       String[] afterLog = {"logout.xhtml", "dashboard.xhtml", "createLaptop.xhtml", "stockLaptops.xhtml","searchLaptop.xhtml","searchOrders.xhtml","stockPhones.xhtml","searchPhone.xhtml","searchLaptop.xhtml","searchCustomer.xhtml","productDetails.xhtml","listOrders.xhtml","listCustomers.xhtml","foundPhones.xhtml","foundOrders.xhtml","foundLaptops.xhtml","foundCustomers.xhtml","customerDetails.xhtml","createPhone.xhtml","createOrder.xhtml","createCustomer.xhtml"};
        String url=req.getRequestURI();
        if (session==null || !session.isLogged()) {
            boolean risk=false;
@@ -63,6 +80,10 @@ public class LoginFilter implements Filter {
            }
        }
     }
+
+    /**
+     *
+     */
     @Override
     public void destroy() {  }
     

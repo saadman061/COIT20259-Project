@@ -15,31 +15,46 @@
   <ui:define name="content">
     <h:messages globalOnly="true" />
 
-    <h:dataTable value="#{orderBean.allOrders}" var="o" border="1" cellpadding="4" style="width:100%; table-layout: fixed;">
+    <h:dataTable value="#{orderBean.allOrders}" var="o" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
       
       <h:column>
-        <f:facet name="header"><b>Order #</b></f:facet>
-        <h:outputText value="#{o.id}" />
+        <f:facet name="header">
+          <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">Order #</div>
+        </f:facet>
+        <div style="padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">#{o.id}</div>
       </h:column>
       
       <h:column>
-        <f:facet name="header"><b>Customer</b></f:facet>
-        <h:link value="#{o.customer.name}" outcome="customerDetails.xhtml">
-          <f:param name="customerId" value="#{o.customer.id}" />
-        </h:link>
+  <f:facet name="header">
+    <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">Customer</div>
+  </f:facet>
+  <div style="padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">
+    <h:form>
+      <h:commandLink value="#{o.customer.name}" action="#{customerBean.viewCustomer(o.customer)}"
+                      style="color:blue; text-decoration:underline;" />
+    </h:form>
+  </div>
+</h:column>
+
+      
+      <h:column>
+        <f:facet name="header">
+          <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">Device</div>
+        </f:facet>
+        <div style="padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">#{o.productModel}</div>
       </h:column>
       
       <h:column>
-        <f:facet name="header"><b>Device</b></f:facet>
-        <h:outputText value="#{o.productModel}" />
-      </h:column>
-      
-      <h:column>
-        <h:form>
-        <f:facet name="header"><b>Action</b></f:facet>
-        <h:commandLink value="Delete" action="#{orderBean.deleteOrder(o)}"
-                 onclick="return confirm('Are you sure you want to delete this order?');" />
-        </h:form>
+        <f:facet name="header">
+          <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">Action</div>
+        </f:facet>
+        <div style="padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">
+          <h:form>
+            <h:commandLink value="Delete" action="#{orderBean.deleteOrder(o)}"
+                            onclick="return confirm('Are you sure you want to delete this order?');"
+                            style="color:blue; text-decoration:underline;" />
+          </h:form>
+        </div>
       </h:column>
     </h:dataTable>
 
@@ -47,7 +62,7 @@
     <h:outputText value="Total orders: #{fn:length(orderBean.allOrders)}" />
 
     <hr />
-    <h:link value="Create a new Order" outcome="createOrder.xhtml" />
+    <h:link value="Create a New Order" outcome="createOrder.xhtml" />
     |
     <h:link value="Main Page" outcome="dashboard.xhtml" />
   </ui:define>

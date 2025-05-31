@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<ui:composition template="layout.xhtml">
+
+  <ui:define name="title">Found Laptops</ui:define>
+
+  <ui:define name="heading">
+    <h2 style="background-color:#4a607a; color:#fff; padding:6px;">The found laptops</h2>
+  </ui:define>
+
+  <ui:define name="content">
+
+    <style>
+      /* Table and cell styles for fixed layout and ellipsis */
+      .fixed-table {
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .fixed-table th, .fixed-table td, .fixed-table div.cell-content {
+        padding: 4px;
+        border: 1px solid #DCDCDC;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 120px;
+        vertical-align: middle;
+      }
+      /* Customize max-width per column if needed */
+      .fixed-table th:nth-child(1), .fixed-table td:nth-child(1), 
+      .fixed-table div.cell-brand { max-width: 100px; }
+      .fixed-table th:nth-child(2), .fixed-table td:nth-child(2), 
+      .fixed-table div.cell-model { max-width: 150px; }
+      .fixed-table th:nth-child(3), .fixed-table td:nth-child(3), 
+      .fixed-table div.cell-displaySize { max-width: 80px; }
+      /* Add other columns similarly as needed */
+    </style>
+
+    <div style="overflow-x:auto;">
+
+      <h:dataTable value="#{productBean.searchResults}" var="prod"
+                   border="0" cellpadding="0" cellspacing="0"
+                   styleClass="fixed-table"
+                   rendered="#{not empty productBean.searchResults}">
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Brand</div>
+          </f:facet>
+          <div class="cell-content cell-brand">#{empty prod.brand ? '—' : prod.brand}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Model</div>
+          </f:facet>
+          <div class="cell-content cell-model">#{empty prod.model ? '—' : prod.model}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Display Size</div>
+          </f:facet>
+          <div class="cell-content cell-displaySize">#{empty prod.displaySize ? '—' : prod.displaySize}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Weight (gram)</div>
+          </f:facet>
+          <div class="cell-content">#{empty prod.weight ? '—' : prod.weight}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Operating System</div>
+          </f:facet>
+          <div class="cell-content">#{empty prod.operatingSystem ? '—' : prod.operatingSystem}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Camera</div>
+          </f:facet>
+          <div class="cell-content">#{empty prod.camera ? '—' : prod.camera}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Wi-Fi</div>
+          </f:facet>
+          <div class="cell-content">#{empty prod.wifi ? '—' : prod.wifi}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Price</div>
+          </f:facet>
+          <div class="cell-content">
+            $ <h:outputText value="#{prod.price}">
+                <f:convertNumber type="currency" currencySymbol="" groupingUsed="true" maxFractionDigits="2" minFractionDigits="2" />
+              </h:outputText>
+          </div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Description</div>
+          </f:facet>
+          <div class="cell-content">#{empty prod.description ? '—' : prod.description}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Stock Number</div>
+          </f:facet>
+          <div class="cell-content">#{empty prod.stockNumber ? '—' : prod.stockNumber}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Network Interface</div>
+          </f:facet>
+          <div class="cell-content">#{empty prod.networkInterface ? '—' : prod.networkInterface}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Hard Drive</div>
+          </f:facet>
+          <div class="cell-content">#{empty prod.hardDrive ? '—' : prod.hardDrive}</div>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">
+            <div style="background-color:#DCDCDC; color:black; font-weight:bold; border:1px solid #DCDCDC; white-space: nowrap;">Ports</div>
+          </f:facet>
+          <div class="cell-content">#{empty prod.ports ? '—' : prod.ports}</div>
+        </h:column>
+
+      </h:dataTable>
+
+      <h:outputText value="No Laptops found." styleClass="no-record"
+                  rendered="#{empty productBean.searchResults}" />
+
+    </div>
+
+    <br />
+    <h:outputText rendered="#{not empty productBean.searchResults}" value="Total laptops: #{fn:length(productBean.searchResults)}" />
+
+    <hr />
+
+    <h:link value="Create a Laptop" outcome="createLaptop.xhtml" />
+    |
+    <h:link value="Main Page" outcome="dashboard.xhtml" />
+
+  </ui:define>
+
+</ui:composition>
+</html>

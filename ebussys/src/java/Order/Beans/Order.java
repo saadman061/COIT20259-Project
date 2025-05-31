@@ -5,30 +5,47 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Entity class representing an Order.
+ * Maps to the "orders" table in the database.
+ */
 @Entity
 @Table(name = "orders")
 public class Order implements Serializable {
 
+    /** Primary key of the order, auto-generated */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    /** Model name of the product ordered */
     private String productModel;
+
+    /** Quantity of the product ordered */
     private int quantity;
+
+    /** Unit price of the product at the time of ordering */
     private double unitPrice;
+
+    /** Date and time when the order was placed */
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
 
-    // Many orders → One customer
+    /** 
+     * The customer who placed the order.
+     * Many orders can be linked to one customer.
+     * Foreign key column: customer_id
+     */
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false) // FK in orders table
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
+    /** Default constructor initializing orderDate to current date/time */
     public Order() {
         this.orderDate = new Date();
     }
 
-    // Getters and setters
+    // === Getters and Setters ===
 
     public int getId() {
         return id;
@@ -61,7 +78,6 @@ public class Order implements Serializable {
     public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
     }
-
 
     public Date getOrderDate() {
         return orderDate;

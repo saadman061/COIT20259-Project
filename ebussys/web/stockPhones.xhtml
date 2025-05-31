@@ -18,40 +18,30 @@
     <h:messages globalOnly="true" />
     <h:outputText rendered="#{not empty param.success}" value="#{param.message}" style="color:blue;" />
 
-    <h:dataTable value="#{phoneBean.allPhones}" var="phone" border="1" cellpadding="4" style="width:100%;">
-      <h:column>
-        <f:facet name="header"><b>Brand</b></f:facet>
-        #{phone.brand}
-      </h:column>
+    
+    <h:dataTable value="#{phoneBean.allPhones}" var="phone" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+  <h:column>
+    <f:facet name="header">
+      <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">Brand</div>
+    </f:facet>
+    <div style="padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">#{phone.brand}</div>
+  </h:column>
 
-      <h:column>
-        <f:facet name="header"><b>Model</b></f:facet>
-        #{phone.model}
-      </h:column>
+  <h:column>
+  <f:facet name="header">
+    <div style="background-color:#DCDCDC; color:black; font-weight:bold; padding:4px; border:1px solid #DCDCDC; white-space: nowrap;">Model</div>
+  </f:facet>
+  <div style="padding:4px; border:1px solid #DCDCDC; white-space: nowrap; color:blue; text-decoration:underline;">#{phone.model}</div>
+</h:column>
 
-      <h:column>
-        <f:facet name="header"><b>Display Size</b></f:facet>
-        #{phone.displaySize}
-      </h:column>
+</h:dataTable>
 
-      <h:column>
-        <f:facet name="header"><b>Weight</b></f:facet>
-        #{phone.weight}
-      </h:column>
-
-      <h:column>
-        <f:facet name="header"><b>OS</b></f:facet>
-        #{phone.operatingSystem}
-      </h:column>
-    </h:dataTable>
 
     <br />
     <h:outputText value="Total phones: #{fn:length(phoneBean.allPhones)}" />
 
     <hr />
     <h:link value="Create a New Phone" outcome="createPhone.xhtml" />
-    |
-    <h:link value="Search Phones" outcome="searchPhone.xhtml" />
     |
     <h:link value="Main Page" outcome="dashboard.xhtml" />
   </ui:define>

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package product.beans;
 
 import java.io.Serializable;
@@ -10,37 +6,68 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
 
-
+/**
+ * Abstract superclass for all product types.
+ * Uses JOINED inheritance strategy for mapping subclasses to separate tables.
+ * Includes common properties shared by all products.
+ * 
+ * The discriminator column "DTYPE" indicates the concrete subclass type.
+ * 
+ * Implements Serializable for entity transfer and storage.
+ * 
+ * Example subclasses: Laptop, Phone, etc.
+ * 
+ */
 @Entity
 @Table(name = "PRODUCT")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 public abstract class Product implements Serializable {
 
+    /** Primary key, auto-generated ID */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /** Brand name of the product */
     private String brand;
+
+    /** Model name or number */
     private String model;
+
+    /** Display size in inches */
     private double displaySize;
+
+    /** Weight in grams */
     private int weight;
+
+    /** Operating system of the product */
     private String operatingSystem;
+
+    /** Camera specifications */
     private String camera;
+
+    /** Wi-Fi capability details */
     private String wifi;
+
+    /** Price of the product */
     private double price;
+
+    /** Description or notes */
     private String description;
+
+    /** Number of items currently in stock */
     private int stockNumber;
 
+    /** Default constructor */
     public Product() {}
 
-    // === Getters & Setters ===
+    // === Getters and Setters === //
 
     public Integer getId() {
         return id;
